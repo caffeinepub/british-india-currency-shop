@@ -1,0 +1,181 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Font-face declarations ─────────────────────────────────────────────── */
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay-VariableFont_wght.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-VariableItalic.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Design Tokens ──────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --radius: 0.375rem;
+
+    /* Parchment / antique warm palette */
+    --background: 0.96 0.018 80;          /* warm parchment white */
+    --foreground: 0.22 0.04 55;           /* deep sepia brown */
+
+    --card: 0.98 0.012 78;                /* slightly warmer card */
+    --card-foreground: 0.22 0.04 55;
+
+    --popover: 0.98 0.012 78;
+    --popover-foreground: 0.22 0.04 55;
+
+    --primary: 0.48 0.12 60;              /* rich antique gold */
+    --primary-foreground: 0.98 0.01 80;
+
+    --secondary: 0.92 0.025 75;           /* muted parchment secondary */
+    --secondary-foreground: 0.28 0.06 55;
+
+    --muted: 0.93 0.018 75;
+    --muted-foreground: 0.5 0.04 60;
+
+    --accent: 0.7 0.14 70;               /* warm gold accent */
+    --accent-foreground: 0.15 0.04 55;
+
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.86 0.028 72;             /* warm tan border */
+    --input: 0.88 0.02 76;
+    --ring: 0.6 0.1 68;
+
+    /* Gold highlights */
+    --gold: 0.7 0.16 72;
+    --gold-deep: 0.5 0.13 62;
+    --gold-light: 0.85 0.1 78;
+    --sepia-dark: 0.2 0.05 52;
+    --sepia-medium: 0.35 0.055 58;
+    --parchment: 0.96 0.018 80;
+    --parchment-dark: 0.9 0.025 74;
+
+    --chart-1: 0.646 0.222 41.116;
+    --chart-2: 0.6 0.118 184.704;
+    --chart-3: 0.398 0.07 227.392;
+    --chart-4: 0.828 0.189 84.429;
+    --chart-5: 0.769 0.188 70.08;
+
+    --sidebar: 0.94 0.022 74;
+    --sidebar-foreground: 0.22 0.04 55;
+    --sidebar-primary: 0.48 0.12 60;
+    --sidebar-primary-foreground: 0.98 0.01 80;
+    --sidebar-accent: 0.9 0.03 74;
+    --sidebar-accent-foreground: 0.28 0.06 55;
+    --sidebar-border: 0.86 0.028 72;
+    --sidebar-ring: 0.6 0.1 68;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "General Sans", system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", Georgia, serif;
+  }
+}
+
+/* ─── Utilities ───────────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-display {
+    font-family: "Playfair Display", Georgia, serif;
+  }
+
+  .font-body {
+    font-family: "General Sans", system-ui, sans-serif;
+  }
+
+  .text-gold {
+    color: oklch(var(--gold));
+  }
+
+  .text-sepia {
+    color: oklch(var(--sepia-medium));
+  }
+
+  .bg-parchment {
+    background-color: oklch(var(--parchment));
+  }
+
+  .bg-parchment-dark {
+    background-color: oklch(var(--parchment-dark));
+  }
+
+  .border-gold {
+    border-color: oklch(var(--gold));
+  }
+
+  /* Subtle grain texture overlay */
+  .texture-grain {
+    position: relative;
+  }
+
+  .texture-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .ornament-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: oklch(var(--gold));
+  }
+
+  .ornament-divider::before,
+  .ornament-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, oklch(var(--gold)), transparent);
+  }
+}
+
+/* ─── Scrollbar ───────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: oklch(var(--parchment-dark));
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--gold));
+  border-radius: 4px;
+}
